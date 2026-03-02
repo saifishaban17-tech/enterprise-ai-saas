@@ -1,0 +1,239 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Enterprise AI Hub — Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-8",
+      "summary": "Build a mobile-first React frontend with bottom navigation, dark-mode enterprise theme, and seven main screens",
+      "acceptanceCriteria": [
+        "App is responsive and optimized for mobile screen sizes",
+        "Bottom navigation gives access to all main screens",
+        "Dark mode is applied consistently across all screens",
+        "Visual theme (teal accent, charcoal background) is consistent"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add global dark-mode enterprise theme variables: deep charcoal backgrounds (#1a1a1a, #232323), electric teal accents (#00d9ff, #00b8cc), clean sans-serif typography (system-ui, -apple-system), subtle shadows, and rounded corner utilities. Apply consistent card-based styling for mobile-first layouts."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme to include custom color palette (charcoal, teal), spacing for mobile layouts, and shadow utilities matching the enterprise theme. Ensure mobile-first breakpoints are configured."
+        },
+        {
+          "path": "frontend/src/components/BottomNav.tsx",
+          "operation": "create",
+          "description": "Create a mobile bottom navigation bar component with icons and labels for all seven main screens (Dashboard, Projects, Leads, Post Scheduler, AI Generator, Vision Analyzer, Profile/Settings). Use teal accent for active route and charcoal background. Integrate with React Router."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create a Layout component that wraps all authenticated screens with the BottomNav component and applies consistent dark theme background and padding for mobile. Include a top app bar with logo and logout button."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire Layout component to authenticated routes. Ensure all main screens (Dashboard, Projects, Leads, PostScheduler, AIGenerator, VisionAnalyzer) are nested under Layout and accessible via React Router. Unauthenticated routes (Login/Register) remain outside Layout."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Build Login and Register screen with email, password, role selector, workspace ID fields, session token persistence, and inline validation errors",
+      "acceptanceCriteria": [
+        "Users can register with all required fields",
+        "Users can log in and are redirected to Dashboard on success",
+        "Errors are shown inline without page reload",
+        "Session token is stored and used for subsequent API calls"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/LoginRegister.tsx",
+          "operation": "create",
+          "description": "Create a Login/Register screen using the authorization component. Include Internet Identity login button prominently. On successful login, check if user profile exists using getCallerUserProfile. If no profile exists, show inline form to capture email, role (admin/company/user selector), workspace ID, and name, then call registerUser and saveCallerUserProfile. On success, redirect to Dashboard. Use the generated splash background image (frontend/public/assets/generated/login-splash.dim_1080x1920.png) as the screen background. Display the generated logo (frontend/public/assets/generated/enterprise-logo.dim_256x256.png) at the top. Show validation errors inline. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useAuth.ts",
+          "operation": "create",
+          "description": "Create a custom hook that wraps the authorization component's useInternetIdentity hook and extends it with enterprise-specific logic: check user profile existence after login, trigger profile setup modal if needed, and provide isAuthenticated, currentUser, and logout helpers."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire LoginRegister screen as the default unauthenticated route. Add route guards that redirect unauthenticated users to /login and authenticated users to /dashboard. Ensure query cache is cleared on logout."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Build Admin Dashboard screen displaying four stat cards (Total Projects, Total Leads, Total Scheduled Posts, Total AI Generations) with role-based access",
+      "acceptanceCriteria": [
+        "Dashboard shows 4 stat cards with accurate counts",
+        "Non-admin users see an access denied message",
+        "Data is fetched on mount using React Query"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "create",
+          "description": "Create an Admin Dashboard screen that calls getDashboardStats from the backend on mount using React Query. Display four stat cards with large numbers and icon indicators (Projects, Leads, Scheduled Posts, AI Generations) in a mobile-friendly grid. Use charcoal card backgrounds with teal icon accents. Show access denied message for non-admin users by checking isCallerAdmin. Show loading skeleton while fetching."
+        },
+        {
+          "path": "frontend/src/components/StatCard.tsx",
+          "operation": "create",
+          "description": "Create a reusable StatCard component that displays a title, large number, and optional icon. Style with dark card background, rounded corners, subtle shadow, and teal accent for the icon."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the /dashboard route and wire it to the Dashboard page within the Layout component. Ensure it is listed in the bottom navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Build Projects screen with project list cards, status badges, and a floating action button to create new projects (admin/company roles only)",
+      "acceptanceCriteria": [
+        "Projects are listed as cards with status badge color-coded by status",
+        "Create form validates required fields before submitting",
+        "New project appears in list after creation without full reload"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Projects.tsx",
+          "operation": "create",
+          "description": "Create a Projects screen that fetches listProjects on mount using React Query. Display projects as mobile-friendly cards with name, status badge (color-coded: pending=yellow, active=green, completed=gray), and clientId. Include a floating action button (FAB) that opens a modal form to create a new project (name, clientId fields). Show FAB only if user role is admin or company (check via getCallerUserProfile). Use React Query mutation for createProject and invalidate projects query on success. Show inline validation errors in the form."
+        },
+        {
+          "path": "frontend/src/components/ProjectCard.tsx",
+          "operation": "create",
+          "description": "Create a reusable ProjectCard component displaying project name, clientId, and status badge. Style with charcoal background, teal border on hover, and color-coded status badges."
+        },
+        {
+          "path": "frontend/src/components/CreateProjectModal.tsx",
+          "operation": "create",
+          "description": "Create a modal component for creating projects with fields for name and clientId. Include form validation and submit handler that calls the createProject mutation. Style modal with dark background and teal CTA button."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the /projects route and wire it to the Projects page within the Layout component. Ensure it is listed in the bottom navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Build Leads screen with lead list cards and a form to capture new leads (accessible to all authenticated users)",
+      "acceptanceCriteria": [
+        "Leads are listed as mobile-friendly cards",
+        "Capture form is accessible to all authenticated users",
+        "New lead appears in list immediately after submission"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Leads.tsx",
+          "operation": "create",
+          "description": "Create a Leads screen that fetches listLeads on mount using React Query. Display leads as mobile-friendly cards with name, phone, source, and status badge (color-coded: new=blue, contacted=orange, converted=green). Include an inline form at the top to capture a new lead (name, phone, source fields). Use React Query mutation for createLead and invalidate leads query on success. Show inline validation errors."
+        },
+        {
+          "path": "frontend/src/components/LeadCard.tsx",
+          "operation": "create",
+          "description": "Create a reusable LeadCard component displaying lead name, phone, source, and status badge. Style with charcoal background and color-coded status badges."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the /leads route and wire it to the Leads page within the Layout component. Ensure it is listed in the bottom navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Build Post Scheduler screen where admins can compose and schedule posts, and list all scheduled posts with platform badge and status",
+      "acceptanceCriteria": [
+        "Platform selector offers exactly three options",
+        "Schedule form validates all fields before submitting",
+        "Scheduled posts list updates after new submission",
+        "Non-admin users see a read-only view of scheduled posts"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/PostScheduler.tsx",
+          "operation": "create",
+          "description": "Create a Post Scheduler screen that fetches listScheduledPosts on mount using React Query. Display scheduled posts as cards with platform badge (Instagram/Facebook/LinkedIn), content preview, scheduled timestamp, and status badge (pending=yellow, sent=green). Include a compose form (admin only) with platform selector (Instagram, Facebook, LinkedIn), content textarea, and date-time picker for scheduledAt. Use React Query mutation for schedulePost and invalidate posts query on success. Show access denied message for non-admin users attempting to schedule. Show inline validation errors."
+        },
+        {
+          "path": "frontend/src/components/ScheduledPostCard.tsx",
+          "operation": "create",
+          "description": "Create a reusable ScheduledPostCard component displaying platform badge, content preview, scheduled timestamp, and status badge. Style with charcoal background and teal platform badge."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the /post-scheduler route and wire it to the PostScheduler page within the Layout component. Ensure it is listed in the bottom navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "summary": "Build AI Generator screen with prompt input, Generate button, and result card displaying AI-generated response with loading state",
+      "acceptanceCriteria": [
+        "User can type a prompt and tap Generate",
+        "Loading spinner is visible during the call",
+        "Response is displayed in a readable card after generation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AIGenerator.tsx",
+          "operation": "create",
+          "description": "Create an AI Generator screen with a large textarea for entering a prompt and a Generate button. Use React Query mutation for generateAIText. Display the AI-generated response in a styled result card below the form. Show a loading spinner while the request is in progress. Style with charcoal background, teal Generate button, and clean result card with syntax highlighting or monospace font for the response."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the /ai-generator route and wire it to the AIGenerator page within the Layout component. Ensure it is listed in the bottom navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Build Vision Analyzer screen with image upload, preview, Analyze button, and result card displaying analysis with loading state",
+      "acceptanceCriteria": [
+        "Image file picker opens on tap",
+        "Selected image preview is shown before submission",
+        "Analysis result card appears after successful call",
+        "Loading state is shown while analysis is in progress"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/VisionAnalyzer.tsx",
+          "operation": "create",
+          "description": "Create a Vision Analyzer screen where users can upload an image from their device using a file input. Display a preview of the selected image in a mobile-friendly card. Include an Analyze button that converts the image to base64 and calls analyzeImage via React Query mutation. Show the analysis result in a card below after successful submission. Show a loading spinner during processing. Style with charcoal background, teal Analyze button, and clean result card."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the /vision-analyzer route and wire it to the VisionAnalyzer page within the Layout component. Ensure it is listed in the bottom navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "summary": "Render the generated app logo and splash background as static assets in the Login/Register screen",
+      "acceptanceCriteria": [
+        "Logo image is displayed in the login screen header",
+        "Splash background is used on the login/register screen"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/LoginRegister.tsx",
+          "operation": "modify",
+          "description": "Reference the generated logo image at frontend/public/assets/generated/enterprise-logo.dim_256x256.png in the header of the LoginRegister screen. Use the generated splash background image at frontend/public/assets/generated/login-splash.dim_1080x1920.png as the screen background via CSS background-image or inline style."
+        }
+      ]
+    }
+  ]
+}

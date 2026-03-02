@@ -1,0 +1,20 @@
+{
+  "frontend/src/index.css": "Global dark-mode enterprise theme with OKLCH color tokens, teal accent system, Inter/Space Grotesk fonts, and utility classes for gradients, glows, and mobile-safe spacing.",
+  "frontend/tailwind.config.js": "Extended Tailwind config with custom teal/charcoal color palette, Space Grotesk/Inter font families, enhanced border radii, shadow utilities, and fade/slide animations.",
+  "frontend/src/hooks/useQueries.ts": "All React Query hooks for backend operations: user profile, registration, admin check, dashboard stats, projects, leads, scheduled posts, AI generation, and image analysis.",
+  "frontend/src/App.tsx": "Main app with TanStack Router setup, auth guard components (checking identity + profile), and all routes nested under a Layout with protected access.",
+  "frontend/src/components/Layout.tsx": "Authenticated layout wrapper composing TopBar and BottomNav with a scrollable main content area and mobile-safe padding.",
+  "frontend/src/components/TopBar.tsx": "Sticky top app bar showing the Enterprise AI logo, user profile info (name/role/workspace), avatar initial, and logout button.",
+  "frontend/src/components/BottomNav.tsx": "Fixed mobile bottom navigation with six icon+label tabs (Dashboard, Projects, Leads, Posts, AI, Vision) with active teal highlight state.",
+  "frontend/src/components/StatCard.tsx": "Reusable stat card displaying a title, large number value, and colored icon badge for the admin dashboard grid.",
+  "frontend/src/components/ProjectCard.tsx": "Project list card showing name, client ID, color-coded status badge (pending/active/completed), and project ID.",
+  "frontend/src/components/LeadCard.tsx": "Lead list card showing name, phone, source with icons, and color-coded status badge (new/contacted/converted).",
+  "frontend/src/components/ScheduledPostCard.tsx": "Scheduled post card with platform icon badge (Instagram/Facebook/LinkedIn), content preview, formatted timestamp, and status badge.",
+  "frontend/src/pages/LoginPage.tsx": "Login/register page with splash background, logo, Internet Identity login button, and inline profile setup form (name, email, role, workspace ID) for new users.",
+  "frontend/src/pages/Dashboard.tsx": "Admin dashboard showing four stat cards (projects, leads, posts, AI generations) with loading skeletons and access-denied message for non-admins.",
+  "frontend/src/pages/Projects.tsx": "Projects list page with role-gated \"New Project\" FAB, create modal with validation, and card list with status badges.",
+  "frontend/src/pages/Leads.tsx": "Leads page with collapsible capture form (name, phone, source) accessible to all users, and a card list of all workspace leads.",
+  "frontend/src/pages/PostScheduler.tsx": "Post scheduler with admin-only compose form (platform selector, content textarea, datetime picker) and a card list of all scheduled posts.",
+  "frontend/src/pages/AIGenerator.tsx": "AI text generator with prompt textarea, Generate button, prompt suggestions, and a result card with copy functionality.",
+  "frontend/src/pages/VisionAnalyzer.tsx": "Vision analyzer with image file picker, preview with remove button, Analyze button, and analysis result card display."
+}

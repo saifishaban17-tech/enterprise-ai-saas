@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Light mode (not primary use case, but defined) */
+    --background: 0.12 0.008 240;
+    --foreground: 0.95 0.005 240;
+    --card: 0.16 0.01 240;
+    --card-foreground: 0.95 0.005 240;
+    --popover: 0.18 0.01 240;
+    --popover-foreground: 0.95 0.005 240;
+    --primary: 0.78 0.18 195;
+    --primary-foreground: 0.08 0.01 240;
+    --secondary: 0.22 0.012 240;
+    --secondary-foreground: 0.85 0.005 240;
+    --muted: 0.20 0.01 240;
+    --muted-foreground: 0.55 0.01 240;
+    --accent: 0.78 0.18 195;
+    --accent-foreground: 0.08 0.01 240;
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.28 0.012 240;
+    --input: 0.22 0.012 240;
+    --ring: 0.78 0.18 195;
+    --chart-1: 0.78 0.18 195;
+    --chart-2: 0.72 0.16 160;
+    --chart-3: 0.65 0.20 280;
+    --chart-4: 0.75 0.18 50;
+    --chart-5: 0.68 0.22 340;
+    --sidebar: 0.14 0.009 240;
+    --sidebar-foreground: 0.95 0.005 240;
+    --sidebar-primary: 0.78 0.18 195;
+    --sidebar-primary-foreground: 0.08 0.01 240;
+    --sidebar-accent: 0.20 0.01 240;
+    --sidebar-accent-foreground: 0.85 0.005 240;
+    --sidebar-border: 0.28 0.012 240;
+    --sidebar-ring: 0.78 0.18 195;
+
+    /* Custom tokens */
+    --teal: 0.78 0.18 195;
+    --teal-dim: 0.65 0.15 195;
+    --charcoal-1: 0.10 0.008 240;
+    --charcoal-2: 0.14 0.009 240;
+    --charcoal-3: 0.18 0.01 240;
+    --charcoal-4: 0.22 0.012 240;
+  }
+
+  .dark {
+    --background: 0.10 0.008 240;
+    --foreground: 0.95 0.005 240;
+    --card: 0.14 0.009 240;
+    --card-foreground: 0.95 0.005 240;
+    --popover: 0.16 0.01 240;
+    --popover-foreground: 0.95 0.005 240;
+    --primary: 0.78 0.18 195;
+    --primary-foreground: 0.08 0.01 240;
+    --secondary: 0.20 0.012 240;
+    --secondary-foreground: 0.85 0.005 240;
+    --muted: 0.18 0.01 240;
+    --muted-foreground: 0.55 0.01 240;
+    --accent: 0.78 0.18 195;
+    --accent-foreground: 0.08 0.01 240;
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.26 0.012 240;
+    --input: 0.20 0.012 240;
+    --ring: 0.78 0.18 195;
+    --chart-1: 0.78 0.18 195;
+    --chart-2: 0.72 0.16 160;
+    --chart-3: 0.65 0.20 280;
+    --chart-4: 0.75 0.18 50;
+    --chart-5: 0.68 0.22 340;
+    --sidebar: 0.12 0.009 240;
+    --sidebar-foreground: 0.95 0.005 240;
+    --sidebar-primary: 0.78 0.18 195;
+    --sidebar-primary-foreground: 0.08 0.01 240;
+    --sidebar-accent: 0.18 0.01 240;
+    --sidebar-accent-foreground: 0.85 0.005 240;
+    --sidebar-border: 0.26 0.012 240;
+    --sidebar-ring: 0.78 0.18 195;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  .teal-glow {
+    box-shadow: 0 0 20px oklch(0.78 0.18 195 / 0.25);
+  }
+  .card-hover {
+    @apply transition-all duration-200 hover:border-primary/40 hover:shadow-lg;
+  }
+  .gradient-teal {
+    background: linear-gradient(135deg, oklch(0.78 0.18 195), oklch(0.65 0.15 195));
+  }
+  .text-gradient-teal {
+    background: linear-gradient(135deg, oklch(0.85 0.18 195), oklch(0.70 0.15 195));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

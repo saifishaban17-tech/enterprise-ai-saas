@@ -1,0 +1,290 @@
+{
+  "kind": "build_request",
+  "title": "Enterprise AI SaaS Mobile App — Full Stack",
+  "projectName": "Enterprise AI Hub",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a Motoko backend actor that manages multi-tenant workspaces. Each workspace has an ID, name, and owner. Users are associated with a workspace and have a role: admin, company, or user. Store users with email, hashed password, role, and workspaceId. Expose functions: registerUser, loginUser (returns a session token), getMe.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can register with email, password, and role",
+        "Login returns a session token tied to the user and workspace",
+        "Role-based access is enforced per operation"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement project management in the Motoko backend. Projects have id, name, clientId, status (pending/active/completed), and workspaceId. Expose createProject (admin/company only) and listProjects (all authenticated users, scoped to their workspace).",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin and company roles can create projects",
+        "Projects are isolated per workspace",
+        "listProjects returns only projects belonging to the caller's workspace"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement lead management in the Motoko backend. Leads have id, name, phone, source, status (new/contacted/converted), and workspaceId. Expose createLead and listLeads scoped to the caller's workspace.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Any authenticated user can capture a lead",
+        "Leads are isolated per workspace",
+        "listLeads returns only leads belonging to the caller's workspace"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement a social media post scheduling engine in the Motoko backend. Scheduled posts have id, platform (Instagram/Facebook/LinkedIn), content, scheduledAt timestamp, status (pending/sent), and workspaceId. Expose schedulePost (admin only) and listScheduledPosts scoped to workspace.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Only admins can schedule posts",
+        "Scheduled posts are listed per workspace",
+        "Platform field accepts Instagram, Facebook, or LinkedIn"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement an AI text generation module in the Motoko backend. Expose a generateAIText function that accepts a prompt string and returns a simulated AI-generated response string. Require authentication to call this endpoint.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Only authenticated users can call generateAIText",
+        "Returns a non-empty response string for any prompt",
+        "Prompt and response are logged per workspace"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement an image/vision analysis module in the Motoko backend. Expose analyzeImage that accepts a base64-encoded image string and returns a simulated analysis result. Require authentication.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Only authenticated users can call analyzeImage",
+        "Returns an analysis result object with a description field",
+        "Analysis records are stored per workspace"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Implement an admin dashboard analytics function in the Motoko backend. Expose getDashboardStats (admin only) that returns totalProjects, totalLeads, totalScheduledPosts, and totalAIGenerations scoped to the caller's workspace.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Only admin role can access dashboard stats",
+        "All counts are scoped to the admin's workspace",
+        "Returns accurate counts reflecting current data"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Build a mobile-first React frontend with a bottom navigation bar. Screens: Login/Register, Dashboard, Projects, Leads, Post Scheduler, AI Generator, Vision Analyzer. Use a sleek dark-mode enterprise theme with deep charcoal backgrounds, electric teal accents, and clean sans-serif typography. Apply consistent card-based layouts with subtle shadows and rounded corners throughout.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App is responsive and optimized for mobile screen sizes",
+        "Bottom navigation gives access to all main screens",
+        "Dark mode is applied consistently across all screens",
+        "Visual theme (teal accent, charcoal background) is consistent"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Build a Login and Register screen. Show email, password, role selector (admin/company/user), and workspace ID fields. On success, persist the session token in local state and redirect to the Dashboard. Show validation errors inline.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can register with all required fields",
+        "Users can log in and are redirected to Dashboard on success",
+        "Errors are shown inline without page reload",
+        "Session token is stored and used for subsequent API calls"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Build an Admin Dashboard screen that fetches and displays stat cards: Total Projects, Total Leads, Total Scheduled Posts, Total AI Generations. Use large numbers with icon indicators. Only visible to admin role.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Dashboard shows 4 stat cards with accurate counts",
+        "Non-admin users see an access denied message",
+        "Data is fetched on mount using React Query"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Build a Projects screen with a list of workspace projects displayed as cards (name, status badge, client ID). Include a floating action button that opens a form to create a new project (name, clientId fields). Only admin and company roles can see the create button.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Projects are listed as cards with status badge color-coded by status",
+        "Create form validates required fields before submitting",
+        "New project appears in list after creation without full reload"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Build a Leads screen with a list of workspace leads displayed as cards (name, phone, source, status badge). Include a form to capture a new lead (name, phone, source fields). All authenticated users can add leads.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Leads are listed as mobile-friendly cards",
+        "Capture form is accessible to all authenticated users",
+        "New lead appears in list immediately after submission"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Build a Post Scheduler screen where admins can compose a post (platform selector: Instagram/Facebook/LinkedIn, content textarea, scheduled date-time picker) and submit to schedule it. List all scheduled posts in a card view with platform badge and status.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Platform selector offers exactly three options",
+        "Schedule form validates all fields before submitting",
+        "Scheduled posts list updates after new submission",
+        "Non-admin users see a read-only view of scheduled posts"
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Build an AI Generator screen with a large text area for entering a prompt and a Generate button. Display the AI-generated response in a styled result card below. Show a loading spinner while the request is in progress.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can type a prompt and tap Generate",
+        "Loading spinner is visible during the call",
+        "Response is displayed in a readable card after generation"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Build a Vision Analyzer screen where users can upload an image from their device. Display a preview of the selected image and an Analyze button. Show the analysis result in a card below after submission. Show a loading state during processing.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3",
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Image file picker opens on tap",
+        "Selected image preview is shown before submission",
+        "Analysis result card appears after successful call",
+        "Loading state is shown while analysis is in progress"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Render the generated app logo and splash background as static assets in frontend/public/assets/generated.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Logo image is displayed in the login screen header",
+        "Splash background is used on the login/register screen"
+      ]
+    }
+  ],
+  "constraints": [
+    "All backend logic must remain in a single Motoko actor in backend/main.mo",
+    "No external databases (PostgreSQL, Redis) — use Motoko stable storage",
+    "No Node.js, Express, or server-side JavaScript in the backend",
+    "No React Native or mobile framework — build a mobile-first responsive React web app",
+    "Do not edit any files under frontend/src/hooks/ or frontend/src/components/ui",
+    "No external AI API integrations (OpenAI, etc.) — simulate AI responses in Motoko"
+  ],
+  "nonGoals": [
+    "Native iOS or Android app packaging",
+    "Real-time WebSocket features",
+    "Email or SMS notifications",
+    "Actual social media API integration (Instagram, Facebook, LinkedIn)",
+    "Real AI/ML model inference — responses are simulated",
+    "Payment processing",
+    "External cloud storage for images"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Sleek enterprise SaaS logo mark — abstract teal circuit-node symbol on dark background (enterprise-logo.dim_256x256.png)",
+      "Dark mobile login screen splash background — deep charcoal with subtle teal geometric grid lines (login-splash.dim_1080x1920.png)"
+    ],
+    "edits": []
+  }
+}

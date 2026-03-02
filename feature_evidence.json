@@ -1,0 +1,171 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-build-a-mobile-first-react-frontend-with-a-bottom-navigation-bar-screens-login-register-dashboard-projects-leads-post-scheduler-ai-generator-vision-analyzer-use-a-sleek-dark-mode-enterprise-theme-with-deep-charcoal-backgrounds-electric-teal-accents-and-clean-sans-serif-typography-apply-consistent-card-based-layouts-with-subtle-shadows-and-rounded-corners-throughout",
+      "featureTitle": "Build a mobile-first React frontend with a bottom navigation bar. Screens: Login/Register, Dashboard, Projects, Leads, Post Scheduler, AI Generator, Vision Analyzer. Use a sleek dark-mode enterprise theme with deep charcoal backgrounds, electric teal accents, and clean sans-serif typography. Apply consistent card-based layouts with subtle shadows and rounded corners throughout.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/BottomNav.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-login-and-register-screen-show-email-password-role-selector-admin-company-user-and-workspace-id-fields-on-success-persist-the-session-token-in-local-state-and-redirect-to-the-dashboard-show-validation-errors-inline",
+      "featureTitle": "Build a Login and Register screen. Show email, password, role selector (admin/company/user), and workspace ID fields. On success, persist the session token in local state and redirect to the Dashboard. Show validation errors inline.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-an-admin-dashboard-screen-that-fetches-and-displays-stat-cards-total-projects-total-leads-total-scheduled-posts-total-ai-generations-use-large-numbers-with-icon-indicators-only-visible-to-admin-role",
+      "featureTitle": "Build an Admin Dashboard screen that fetches and displays stat cards: Total Projects, Total Leads, Total Scheduled Posts, Total AI Generations. Use large numbers with icon indicators. Only visible to admin role.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/StatCard.tsx",
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-projects-screen-with-a-list-of-workspace-projects-displayed-as-cards-name-status-badge-client-id-include-a-floating-action-button-that-opens-a-form-to-create-a-new-project-name-clientid-fields-only-admin-and-company-roles-can-see-the-create-button",
+      "featureTitle": "Build a Projects screen with a list of workspace projects displayed as cards (name, status badge, client ID). Include a floating action button that opens a form to create a new project (name, clientId fields). Only admin and company roles can see the create button.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ProjectCard.tsx",
+        "frontend/src/pages/Projects.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-leads-screen-with-a-list-of-workspace-leads-displayed-as-cards-name-phone-source-status-badge-include-a-form-to-capture-a-new-lead-name-phone-source-fields-all-authenticated-users-can-add-leads",
+      "featureTitle": "Build a Leads screen with a list of workspace leads displayed as cards (name, phone, source, status badge). Include a form to capture a new lead (name, phone, source fields). All authenticated users can add leads.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/LeadCard.tsx",
+        "frontend/src/pages/Leads.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-post-scheduler-screen-where-admins-can-compose-a-post-platform-selector-instagram-facebook-linkedin-content-textarea-scheduled-date-time-picker-and-submit-to-schedule-it-list-all-scheduled-posts-in-a-card-view-with-platform-badge-and-status",
+      "featureTitle": "Build a Post Scheduler screen where admins can compose a post (platform selector: Instagram/Facebook/LinkedIn, content textarea, scheduled date-time picker) and submit to schedule it. List all scheduled posts in a card view with platform badge and status.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ScheduledPostCard.tsx",
+        "frontend/src/pages/PostScheduler.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-an-ai-generator-screen-with-a-large-text-area-for-entering-a-prompt-and-a-generate-button-display-the-ai-generated-response-in-a-styled-result-card-below-show-a-loading-spinner-while-the-request-is-in-progress",
+      "featureTitle": "Build an AI Generator screen with a large text area for entering a prompt and a Generate button. Display the AI-generated response in a styled result card below. Show a loading spinner while the request is in progress.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/AIGenerator.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-vision-analyzer-screen-where-users-can-upload-an-image-from-their-device-display-a-preview-of-the-selected-image-and-an-analyze-button-show-the-analysis-result-in-a-card-below-after-submission-show-a-loading-state-during-processing",
+      "featureTitle": "Build a Vision Analyzer screen where users can upload an image from their device. Display a preview of the selected image and an Analyze button. Show the analysis result in a card below after submission. Show a loading state during processing.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/VisionAnalyzer.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
